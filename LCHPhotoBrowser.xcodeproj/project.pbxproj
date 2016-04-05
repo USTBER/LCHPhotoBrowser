@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		610DDCA41624915F18C3BA8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCB8C3AF3E8766A822C7A29 /* libPods.a */; };
 		92A3A94B1CB2B24400ACF704 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3A94A1CB2B24400ACF704 /* main.m */; };
 		92A3A94E1CB2B24400ACF704 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3A94D1CB2B24400ACF704 /* AppDelegate.m */; };
 		92A3A9511CB2B24400ACF704 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3A9501CB2B24400ACF704 /* ViewController.m */; };
@@ -17,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FCB8C3AF3E8766A822C7A29 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D94CD2E2860144A8D10E6F2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8A8742F8A7EB8C6D92B53F46 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		92A3A9461CB2B24400ACF704 /* LCHPhotoBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LCHPhotoBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92A3A94A1CB2B24400ACF704 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92A3A94C1CB2B24400ACF704 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -35,17 +39,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				610DDCA41624915F18C3BA8C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7ABC501029B7F8E7832F8839 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A8742F8A7EB8C6D92B53F46 /* Pods.debug.xcconfig */,
+				3D94CD2E2860144A8D10E6F2 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		92A3A93D1CB2B24400ACF704 = {
 			isa = PBXGroup;
 			children = (
 				92A3A9481CB2B24400ACF704 /* LCHPhotoBrowser */,
 				92A3A9471CB2B24400ACF704 /* Products */,
+				7ABC501029B7F8E7832F8839 /* Pods */,
+				C726600C9DAA69C54794A174 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,15 +76,13 @@
 		92A3A9481CB2B24400ACF704 /* LCHPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				92A3A94C1CB2B24400ACF704 /* AppDelegate.h */,
-				92A3A94D1CB2B24400ACF704 /* AppDelegate.m */,
-				92A3A94F1CB2B24400ACF704 /* ViewController.h */,
-				92A3A9501CB2B24400ACF704 /* ViewController.m */,
-				92A3A9521CB2B24400ACF704 /* Main.storyboard */,
-				92A3A9581CB2B24400ACF704 /* Assets.xcassets */,
-				92A3A95A1CB2B24400ACF704 /* LaunchScreen.storyboard */,
-				92A3A95D1CB2B24400ACF704 /* Info.plist */,
-				92A3A9551CB2B24400ACF704 /* LCHPhotoBrowser.xcdatamodeld */,
+				92A3A9741CB352EE00ACF704 /* GlobalConfig */,
+				92A3A9661CB3519E00ACF704 /* NormalBrowser */,
+				92A3A9671CB351FF00ACF704 /* TableBrowser */,
+				92A3A9681CB3520800ACF704 /* CollectionBrowser */,
+				92A3A9651CB3514700ACF704 /* Resource */,
+				92A3A9641CB3513A00ACF704 /* StoryBoard */,
+				92A3A9631CB3512D00ACF704 /* AppDelegate */,
 				92A3A9491CB2B24400ACF704 /* Supporting Files */,
 			);
 			path = LCHPhotoBrowser;
@@ -82,6 +96,144 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		92A3A9631CB3512D00ACF704 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A94C1CB2B24400ACF704 /* AppDelegate.h */,
+				92A3A94D1CB2B24400ACF704 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		92A3A9641CB3513A00ACF704 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A9521CB2B24400ACF704 /* Main.storyboard */,
+				92A3A95A1CB2B24400ACF704 /* LaunchScreen.storyboard */,
+			);
+			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		92A3A9651CB3514700ACF704 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A9581CB2B24400ACF704 /* Assets.xcassets */,
+				92A3A95D1CB2B24400ACF704 /* Info.plist */,
+				92A3A9551CB2B24400ACF704 /* LCHPhotoBrowser.xcdatamodeld */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		92A3A9661CB3519E00ACF704 /* NormalBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A96D1CB3527900ACF704 /* Model */,
+				92A3A96B1CB3526800ACF704 /* View */,
+				92A3A96A1CB3526200ACF704 /* Controller */,
+			);
+			name = NormalBrowser;
+			sourceTree = "<group>";
+		};
+		92A3A9671CB351FF00ACF704 /* TableBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A9701CB352A000ACF704 /* Model */,
+				92A3A96F1CB3529A00ACF704 /* View */,
+				92A3A96E1CB3529200ACF704 /* Controller */,
+			);
+			name = TableBrowser;
+			sourceTree = "<group>";
+		};
+		92A3A9681CB3520800ACF704 /* CollectionBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A9721CB352B100ACF704 /* Model */,
+				92A3A9731CB352BA00ACF704 /* View */,
+				92A3A9711CB352AA00ACF704 /* Controller */,
+			);
+			name = CollectionBrowser;
+			sourceTree = "<group>";
+		};
+		92A3A96A1CB3526200ACF704 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A94F1CB2B24400ACF704 /* ViewController.h */,
+				92A3A9501CB2B24400ACF704 /* ViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		92A3A96B1CB3526800ACF704 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		92A3A96D1CB3527900ACF704 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		92A3A96E1CB3529200ACF704 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		92A3A96F1CB3529A00ACF704 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		92A3A9701CB352A000ACF704 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		92A3A9711CB352AA00ACF704 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		92A3A9721CB352B100ACF704 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		92A3A9731CB352BA00ACF704 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		92A3A9741CB352EE00ACF704 /* GlobalConfig */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GlobalConfig;
+			sourceTree = "<group>";
+		};
+		C726600C9DAA69C54794A174 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FCB8C3AF3E8766A822C7A29 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +241,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92A3A9601CB2B24400ACF704 /* Build configuration list for PBXNativeTarget "LCHPhotoBrowser" */;
 			buildPhases = (
+				2BA0E512334F8EAF16685FD8 /* Check Pods Manifest.lock */,
 				92A3A9421CB2B24400ACF704 /* Sources */,
 				92A3A9431CB2B24400ACF704 /* Frameworks */,
 				92A3A9441CB2B24400ACF704 /* Resources */,
+				9D66C6DF71F63E785D103274 /* Embed Pods Frameworks */,
+				4ECB2759F684CB8F1BCF9B5A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,6 +301,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BA0E512334F8EAF16685FD8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4ECB2759F684CB8F1BCF9B5A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D66C6DF71F63E785D103274 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92A3A9421CB2B24400ACF704 /* Sources */ = {
@@ -263,6 +466,7 @@
 		};
 		92A3A9611CB2B24400ACF704 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A8742F8A7EB8C6D92B53F46 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LCHPhotoBrowser/Info.plist;
@@ -274,6 +478,7 @@
 		};
 		92A3A9621CB2B24400ACF704 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D94CD2E2860144A8D10E6F2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LCHPhotoBrowser/Info.plist;
@@ -302,6 +507,7 @@
 				92A3A9621CB2B24400ACF704 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
