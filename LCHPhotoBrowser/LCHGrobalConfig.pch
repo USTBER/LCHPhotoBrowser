@@ -1,0 +1,22 @@
+//
+//  LCHGrobalConfig.pch
+//  LCHPhotoBrowser
+//
+//  Created by LiChunxing on 16/4/5.
+//  Copyright © 2016年 Demo. All rights reserved.
+//
+
+#ifndef LCHGrobalConfig_pch
+#define LCHGrobalConfig_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "UIView+LCHProperty.h"
+
+#define ScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
+
+#define ScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
+
+#define WeakSelf(weakSelf) __weak typeof(self) weakSelf = self;
+
+#endif /* LCHGrobalConfig_pch */
