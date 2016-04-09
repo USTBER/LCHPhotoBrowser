@@ -12,9 +12,9 @@
 
 @interface LCHScrollView ()
 
-@property (nonatomic, copy) NSArray<LCHImageButton *> *imageButtons;
 @property (nonatomic, assign) CGFloat buttonLength;
 @property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, copy) NSArray<LCHImageButton *> *imageButtons;
 
 @end
 
@@ -86,8 +86,6 @@ static CGFloat const paddingY = 25;
     scrollView.bounces = YES;
     scrollView.scrollEnabled = YES;
     NSUInteger buttonCount = imageButtons.count;
-    NSUInteger rowNum = (buttonCount % rowCapacity ? buttonCount / rowCapacity  + 1: buttonCount / rowCapacity + 2);
-    NSLog(@"%lu", (unsigned long)rowNum);
     scrollView.imageButtons = imageButtons;
     return scrollView;
 }

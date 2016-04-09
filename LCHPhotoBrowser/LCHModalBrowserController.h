@@ -16,6 +16,8 @@
 
 - (NSURL *_Nonnull)modalBrowser:(LCHModalBrowserController *_Nonnull)modalBrowser highQurityImageURLForIndex:(NSUInteger)index;
 
+- (CGRect)originImageRectForModalBrowser:(LCHModalBrowserController *_Nonnull)modalBrowser;
+
 @end
 
 @interface LCHModalBrowserController : UIViewController
@@ -23,8 +25,6 @@
 @property (nonatomic, assign) NSUInteger currentIndex;
 @property (nonatomic, assign) NSUInteger totalCount;
 @property (nonatomic, weak) id<LCHModalBrowserDataSource> dataSource;
-@property (nonatomic, weak) UIView *currentImageSourceViewSuperView;
 
 - (void)show;
-
 @end

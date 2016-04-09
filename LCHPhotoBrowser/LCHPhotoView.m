@@ -18,7 +18,6 @@
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
 
-- (void)adjustFrame;
 - (void)handleSingleTap:(UITapGestureRecognizer *)singleTap;
 - (void)handleDoubleTap:(UITapGestureRecognizer *)DoubleTap;
 @end
@@ -63,16 +62,17 @@
         return _imageView;
     }
     _imageView = [[UIImageView alloc] init];
-    [self.scrollView addSubview:_imageView];
+    [_imageView setContentMode:UIViewContentModeScaleAspectFit];
+    _imageView.backgroundColor = [self randomColor];
     return _imageView;
 }
 
 - (id)initWithFrame:(CGRect)frame{
     
     self = [super initWithFrame:frame];
-    self.backgroundColor = [self randomColor];
     if(self){
-        [self addSubview:_imageView];
+        [self addSubview:self.scrollView];
+        [self.scrollView addSubview:self.imageView];
         [self addGestureRecognizer:self.singleTap];
         [self addGestureRecognizer:self.doubleTap];
     }
@@ -82,16 +82,16 @@
 - (void)layoutSubviews{
     
     [super layoutSubviews];
-    self.scrollView.frame = self.bounds;
-    
-}
-
-- (void)adjustFrame{
-    
-    self.scrollView.contentSize = self.bounds.size;
     WeakSelf(weakSelf);
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.offset(ScrollMargin / 2);
+        make.top.offset(0);
+        make.width.mas_equalTo(weakSelf.width - ScrollMargin);
+        make.height.mas_equalTo(weakSelf.height);
+    }];
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.scrollView);
+        make.size.equalTo(weakSelf.scrollView);
     }];
     
 }
@@ -101,12 +101,12 @@
     [self.imageView sd_setImageWithURL:imageURL placeholderImage:placeHolderImage options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
+        self.loadingImage = NO;
     }];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)singleTap{
- 
+    
     if(self.singleTapBlock){
         self.singleTapBlock(singleTap);
     }

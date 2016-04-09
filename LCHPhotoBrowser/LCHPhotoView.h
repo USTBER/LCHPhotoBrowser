@@ -12,6 +12,7 @@ typedef void(^_Nonnull SingleTapBlock)(UITapGestureRecognizer *_Nonnull);
 
 @interface LCHPhotoView : UIView
 
+@property (nonatomic, assign, getter=isLoadingImage) BOOL loadingImage;
 @property (nonatomic, strong, nullable) UIScrollView *scrollView;
 @property (nonatomic, strong, nullable) UIImageView *imageView;
 @property (nonatomic, copy) SingleTapBlock singleTapBlock;

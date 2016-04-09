@@ -12,8 +12,9 @@
 
 @interface LCHScrollView : UIScrollView
 
-- (void)updateBottomConstrain;
+@property (nonatomic, copy, readonly) NSArray<LCHImageButton *> *imageButtons;
 
+- (void)updateBottomConstrain;
 + (instancetype)scrollViewWithImageButtons:(NSArray<LCHImageButton *> *)imageButtons;
 
 @end

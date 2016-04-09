@@ -13,12 +13,13 @@
 #import "LCHModalBrowserController.h"
 
 @interface LCHNormalBrowserController ()
-<LCHImageButtonDelegate>
+<LCHImageButtonDelegate, LCHModalBrowserDataSource>
 @property (nonatomic, strong) LCHScrollView *scrollView;
 @property (nonatomic, copy) NSArray<LCHImageButton *> *buttons;
 @property (nonatomic, copy) NSArray *imageURLS;
 @property (nonatomic, strong) NSMutableArray *mutableImages;
 @property (nonatomic, assign) NSUInteger imageCount;
+@property (nonatomic, assign) NSUInteger pressedImageIndex;
 @end
 
 @implementation LCHNormalBrowserController
@@ -87,11 +88,11 @@
 - (void)handleTap:(LCHImageButton *)sender{
     
     NSInteger tag = sender.tag;
-    NSLog(@"我确实被点到了: %ld", (long)tag);
+    self.pressedImageIndex = tag;
     LCHModalBrowserController *modalBrowser = [[LCHModalBrowserController alloc] init];
-    modalBrowser.currentIndex = 0;
-    modalBrowser.totalCount = 10;
-    modalBrowser.currentImageSourceViewSuperView = self.scrollView;
+    modalBrowser.dataSource = self;
+    modalBrowser.currentIndex = tag;
+    modalBrowser.totalCount = self.imageCount;
     [modalBrowser show];
 }
 
@@ -103,6 +104,26 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma LCHModalBrowserControllerDataSource
+
+- (UIImage *)modalBrowser:(LCHModalBrowserController *)modalBrowser placeHolderImageForIndex:(NSUInteger)index{
+    
+    UIImage *image = [[self.mutableImages objectAtIndex:index] copy];
+    return image;
+}
+
+- (NSURL *)modalBrowser:(LCHModalBrowserController *)modalBrowser highQurityImageURLForIndex:(NSUInteger)index{
+    
+    return [self.imageURLS objectAtIndex:index];
+}
+
+- (CGRect)originImageRectForModalBrowser:(LCHModalBrowserController *)modalBrowser{
+    
+    LCHImageButton *imageButton = self.scrollView.imageButtons[self.pressedImageIndex];
+    CGRect rect = imageButton.frame;
+    return rect;
 }
 
 @end

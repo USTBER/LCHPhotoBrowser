@@ -19,4 +19,10 @@
 
 #define WeakSelf(weakSelf) __weak typeof(self) weakSelf = self;
 
+static CGFloat const Padding = 15;
+static CGFloat const SaveButtonWidth = 60;
+static CGFloat const SaveButtonHeight = 25;
+static CGFloat const TitleLabelWidth = 50;
+static CGFloat const ScrollMargin = 20;
+
 #endif /* LCHGrobalConfig_pch */
