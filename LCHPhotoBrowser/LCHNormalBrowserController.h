@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCHNormalBrowserController : UIViewController
+typedef void(^AddImageBlock)(UIImage *image, NSInteger tag);
 
+@interface LCHNormalBrowserController : UIViewController
 
 @end
 

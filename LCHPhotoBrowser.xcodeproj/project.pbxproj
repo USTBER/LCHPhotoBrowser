@@ -21,6 +21,8 @@
 		92A3A9941CB392A000ACF704 /* UIView+LCHProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3A9931CB392A000ACF704 /* UIView+LCHProperty.m */; };
 		92A3A9971CB39A5F00ACF704 /* LCHImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A3A9961CB39A5F00ACF704 /* LCHImageButton.m */; };
 		92A3A9991CB3B3AB00ACF704 /* ImageURLS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A3A9981CB3B3AB00ACF704 /* ImageURLS.plist */; };
+		92AF9F421CB87FE4001F003B /* LCHPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92AF9F411CB87FE4001F003B /* LCHPhotoView.m */; };
+		92AF9F451CB891F5001F003B /* LCHModalBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92AF9F441CB891F5001F003B /* LCHModalBrowserController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,10 @@
 		92A3A9951CB39A5F00ACF704 /* LCHImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCHImageButton.h; sourceTree = "<group>"; };
 		92A3A9961CB39A5F00ACF704 /* LCHImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCHImageButton.m; sourceTree = "<group>"; };
 		92A3A9981CB3B3AB00ACF704 /* ImageURLS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ImageURLS.plist; sourceTree = "<group>"; };
+		92AF9F401CB87FE4001F003B /* LCHPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCHPhotoView.h; sourceTree = "<group>"; };
+		92AF9F411CB87FE4001F003B /* LCHPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCHPhotoView.m; sourceTree = "<group>"; };
+		92AF9F431CB891F5001F003B /* LCHModalBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCHModalBrowserController.h; sourceTree = "<group>"; };
+		92AF9F441CB891F5001F003B /* LCHModalBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCHModalBrowserController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				92A3A9741CB352EE00ACF704 /* Tools */,
+				92A3A99A1CB6455100ACF704 /* ModalBrowser */,
 				92A3A9661CB3519E00ACF704 /* NormalBrowser */,
 				92A3A9671CB351FF00ACF704 /* TableBrowser */,
 				92A3A9681CB3520800ACF704 /* CollectionBrowser */,
@@ -256,6 +263,41 @@
 			name = Tools;
 			sourceTree = "<group>";
 		};
+		92A3A99A1CB6455100ACF704 /* ModalBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				92A3A99D1CB645D200ACF704 /* Model */,
+				92A3A99C1CB645CC00ACF704 /* View */,
+				92A3A99B1CB645C500ACF704 /* Controlloer */,
+			);
+			name = ModalBrowser;
+			sourceTree = "<group>";
+		};
+		92A3A99B1CB645C500ACF704 /* Controlloer */ = {
+			isa = PBXGroup;
+			children = (
+				92AF9F431CB891F5001F003B /* LCHModalBrowserController.h */,
+				92AF9F441CB891F5001F003B /* LCHModalBrowserController.m */,
+			);
+			name = Controlloer;
+			sourceTree = "<group>";
+		};
+		92A3A99C1CB645CC00ACF704 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92AF9F401CB87FE4001F003B /* LCHPhotoView.h */,
+				92AF9F411CB87FE4001F003B /* LCHPhotoView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		92A3A99D1CB645D200ACF704 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		C726600C9DAA69C54794A174 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +435,8 @@
 				92A3A9911CB3918D00ACF704 /* LCHScrollView.m in Sources */,
 				92A3A9571CB2B24400ACF704 /* LCHPhotoBrowser.xcdatamodeld in Sources */,
 				92A3A94E1CB2B24400ACF704 /* AppDelegate.m in Sources */,
+				92AF9F451CB891F5001F003B /* LCHModalBrowserController.m in Sources */,
+				92AF9F421CB87FE4001F003B /* LCHPhotoView.m in Sources */,
 				92A3A9941CB392A000ACF704 /* UIView+LCHProperty.m in Sources */,
 				92A3A94B1CB2B24400ACF704 /* main.m in Sources */,
 			);

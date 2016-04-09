@@ -14,6 +14,7 @@
 @required
 
 - (void)handleTap:(LCHImageButton *)sender;
+- (void)replaceImage:(UIImage *)image tag:(NSInteger)tag;
 
 @end
 
@@ -21,7 +22,7 @@
 
 @property (nonatomic, weak) id<LCHImageButtonDelegate> delegate;
 
-+ (instancetype)imageButtonWithImageURL:(NSURL *)imageURL;
++ (instancetype)imageButtonWithImageURL:(NSURL *)imageURL tag:(NSInteger)tag;
 
 @end
 

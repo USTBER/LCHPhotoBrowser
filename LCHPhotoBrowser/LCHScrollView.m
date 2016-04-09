@@ -16,8 +16,6 @@
 @property (nonatomic, assign) CGFloat buttonLength;
 @property (nonatomic, strong) UIView *bottomView;
 
-
-
 @end
 
 static NSUInteger const rowCapacity = 3;
