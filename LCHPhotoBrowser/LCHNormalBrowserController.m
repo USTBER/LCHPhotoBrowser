@@ -119,9 +119,8 @@
     return [self.imageURLS objectAtIndex:index];
 }
 
-- (CGRect)originImageRectForModalBrowser:(LCHModalBrowserController *)modalBrowser{
-    
-    LCHImageButton *imageButton = self.scrollView.imageButtons[self.pressedImageIndex];
+- (CGRect)originImageRectForModalBrowser:(LCHModalBrowserController *)modalBrowser index:(NSUInteger)index{
+    LCHImageButton *imageButton = self.scrollView.imageButtons[index];
     CGRect rect = imageButton.frame;
     return rect;
 }

@@ -16,7 +16,7 @@
 
 - (NSURL *_Nonnull)modalBrowser:(LCHModalBrowserController *_Nonnull)modalBrowser highQurityImageURLForIndex:(NSUInteger)index;
 
-- (CGRect)originImageRectForModalBrowser:(LCHModalBrowserController *_Nonnull)modalBrowser;
+- (CGRect)originImageRectForModalBrowser:(LCHModalBrowserController *_Nonnull)modalBrowser index:(NSUInteger)index;
 
 @end
 

@@ -31,6 +31,7 @@
 - (CGRect)originImageRect;
 - (void)setUpImageForIndex:(NSUInteger)index;
 
+
 @end
 
 
@@ -109,6 +110,12 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    self.scrollView.contentOffset = CGPointZero;
+}
+
 - (void)viewDidLayoutSubviews{
     
     [super viewDidLayoutSubviews];
@@ -119,8 +126,11 @@
     
     CGPoint contentOffset = self.scrollView.contentOffset;
     contentOffset.x += self.scrollView.width * self.currentIndex;
+    self.currentIndex = NSUIntegerMax;
     [self.scrollView setContentOffset:contentOffset animated:NO];
+    [self configPhotoViewFrame];
     [self setUpImageForIndex:self.currentIndex];
+    
     if(!self.hasShowModalImage){
         [self showModalBrowser];
     }
@@ -203,10 +213,44 @@
 
 - (void)hideModalBrowser{
     
-    [self dismissViewControllerAnimated:YES completion:^{
+    LCHPhotoView *photoView = self.photoViews[self.currentIndex];
+    CGRect targetRect = [self originImageRect];;
+    CGRect currentRect = self.scrollView.frame;
+    UIImage *image = photoView.imageView.image;
+    UIImageView *temImageView = [[UIImageView alloc] initWithFrame:currentRect];
+    temImageView.image = image;
+    temImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view.window addSubview:temImageView];
+    [self dismissViewControllerAnimated:NO completion:^{
         
     }];
+    [UIView animateWithDuration:0.5 animations:^{
+        temImageView.frame = targetRect;
+    } completion:^(BOOL finished) {
+        [temImageView removeFromSuperview];
+    }];
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    CGFloat currentX = scrollView.contentOffset.x;
+    NSUInteger index = currentX / self.scrollView.width + 0.5;
+    if(index == self.currentIndex){
+        return;
+    }
+    self.currentIndex = index;
+    [self.titleLabel setText:[NSString stringWithFormat:@"%lu/%lu", (unsigned long)(self.currentIndex + 1), (unsigned long)self.totalCount]];
+    
+    NSInteger before = index - 2;
+    before = ((before < 0) ? 0 : before);
+    NSInteger after = index + 2;
+    after = (after > (self.totalCount - 1) ? self.totalCount - 1 : after);
+    
+    for(NSInteger i = before; i <= after; i++){
+        [self setUpImageForIndex:i];
+    }
+}
+
 
 - (void)setUpImageForIndex:(NSUInteger)index{
     
@@ -238,32 +282,12 @@
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    CGFloat currentX = scrollView.contentOffset.x;
-    NSUInteger index = currentX / self.scrollView.width + 0.5;
-    if(index == self.currentIndex){
-        return;
-    }
-    self.currentIndex = index;
-    [self.titleLabel setText:[NSString stringWithFormat:@"%lu/%lu", (unsigned long)(self.currentIndex + 1), (unsigned long)self.totalCount]];
-    
-    NSInteger before = index - 2;
-    before = ((before < 0) ? 0 : before);
-    NSInteger after = index + 2;
-    after = (after > (self.totalCount - 1) ? self.totalCount - 1 : after);
-    
-    for(NSInteger i = before; i <= after; i++){
-        [self setUpImageForIndex:i];
-    }
-}
-
 
 - (UIImage *)placeHolderImageForIndex:(NSInteger)index{
     
     if([self.dataSource respondsToSelector:@selector(modalBrowser:placeHolderImageForIndex:)]){
         
-        UIImage *image = [self.dataSource modalBrowser:self placeHolderImageForIndex:self.currentIndex];
+        UIImage *image = [self.dataSource modalBrowser:self placeHolderImageForIndex:index];
         return image;
     }
     return nil;
@@ -273,7 +297,7 @@
 - (NSURL *)highQurityImageForIndex:(NSInteger)index{
     
     if([self.dataSource respondsToSelector:@selector(modalBrowser:highQurityImageURLForIndex:)]){
-        NSURL *imageURL = [self.dataSource modalBrowser:self highQurityImageURLForIndex:self.currentIndex];
+        NSURL *imageURL = [self.dataSource modalBrowser:self highQurityImageURLForIndex:index];
         return imageURL;
     }
     return nil;
@@ -281,9 +305,9 @@
 
 - (CGRect)originImageRect{
     
-    if([self.dataSource respondsToSelector:@selector(originImageRectForModalBrowser:)]){
+    if([self.dataSource respondsToSelector:@selector(originImageRectForModalBrowser:index:)]){
         
-        CGRect rect = [self.dataSource originImageRectForModalBrowser:self];
+        CGRect rect = [self.dataSource originImageRectForModalBrowser:self index:self.currentIndex];
         return rect;
     }
     return CGRectZero;

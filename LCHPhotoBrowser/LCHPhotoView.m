@@ -101,7 +101,7 @@
     [self.imageView sd_setImageWithURL:imageURL placeholderImage:placeHolderImage options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        self.loadingImage = NO;
+//        self.loadingImage = NO;
     }];
 }
 

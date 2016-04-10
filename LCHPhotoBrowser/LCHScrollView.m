@@ -85,7 +85,6 @@ static CGFloat const paddingY = 25;
     scrollView.showsVerticalScrollIndicator = YES;
     scrollView.bounces = YES;
     scrollView.scrollEnabled = YES;
-    NSUInteger buttonCount = imageButtons.count;
     scrollView.imageButtons = imageButtons;
     return scrollView;
 }
