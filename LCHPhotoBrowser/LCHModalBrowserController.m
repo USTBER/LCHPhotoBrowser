@@ -11,7 +11,7 @@
 #import "LCHPhotoView.h"
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
-
+#import <WCAlertView.h>
 
 @interface LCHModalBrowserController ()
 <UIScrollViewDelegate>
@@ -30,14 +30,15 @@
 - (NSURL *)highQurityImageForIndex:(NSInteger)index;
 - (CGRect)originImageRect;
 - (void)setUpImageForIndex:(NSUInteger)index;
-
+- (void)handleSaveButton:(UIButton *)sender;
+- (void)saveImageToAlbumWithImage:(UIImage *)image error:(NSError *)error info:(void *)info;
 
 @end
 
-
-
 @implementation LCHModalBrowserController
 
+
+#pragma 懒加载
 - (UIScrollView *)scrollView{
     if(_scrollView){
         return _scrollView;
@@ -62,6 +63,7 @@
     [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
     [_saveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_saveButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [_saveButton addTarget:self action:@selector(handleSaveButton:) forControlEvents:UIControlEventTouchUpInside];
     return _saveButton;
 }
 
@@ -85,6 +87,8 @@
     return _photoViews;
 }
 
+
+#pragma viewController生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -137,6 +141,7 @@
 }
 
 
+#pragma 内部方法
 - (void)configPhotoViewFrame{
     
     CGFloat scrollWidth = self.scrollView.width;
@@ -180,10 +185,6 @@
     
 }
 
-- (BOOL)prefersStatusBarHidden{
-    
-    return YES;
-}
 
 - (void)showModalBrowser{
     
@@ -231,6 +232,66 @@
     }];
 }
 
+
+- (void)setUpImageForIndex:(NSUInteger)index{
+    
+    
+    LCHPhotoView *photoView = self.photoViews[index];
+    if(!photoView){
+        return;
+    }
+    if(photoView.isLoadingImage){
+        return;
+    }
+    [photoView setImageWithURL:[self highQurityImageForIndex:index] placeHolderImage:[self placeHolderImageForIndex:index]];
+    photoView.loadingImage = YES;
+    
+    
+}
+
+- (void)handleSaveButton:(UIButton *)sender{
+    
+    LCHPhotoView *photoView = self.photoViews[self.currentIndex];
+    UIImage *image = photoView.imageView.image;
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(saveImageToAlbumWithImage:error:info:), NULL);
+}
+
+- (void)saveImageToAlbumWithImage:(UIImage *)image error:(NSError *)error info:(void *)info{
+    
+    NSString *title = @"谢谢您使用LCH壁纸";
+    NSString *message;
+    if (error) {
+        message = @"壁纸保存失败，请检查是否同意保存到相册";
+    }else{
+        message = @"壁纸保存成功，祝您一天心情愉快";
+    }
+    
+    [WCAlertView setDefaultStyle:WCAlertViewStyleWhite];
+    [WCAlertView showAlertWithTitle:title message:message customizationBlock:^(WCAlertView *alertView) {
+        
+    } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
+        
+    } cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+}
+
+- (void)show{
+    
+    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:self animated:NO completion:^{
+        
+    }];
+}
+
+
+
+#pragma 转屏触发事件
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
+    CGFloat scrollWidth = size.width + ScrollMargin;
+    [self.scrollView setContentOffset:CGPointMake(scrollWidth * self.currentIndex, 0) animated:YES];
+    
+}
+
+#pragma scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     CGFloat currentX = scrollView.contentOffset.x;
@@ -252,37 +313,8 @@
 }
 
 
-- (void)setUpImageForIndex:(NSUInteger)index{
-    
-    
-    LCHPhotoView *photoView = self.photoViews[index];
-    if(!photoView){
-        return;
-    }
-    if(photoView.isLoadingImage){
-        return;
-    }
-    [photoView setImageWithURL:[self highQurityImageForIndex:index] placeHolderImage:[self placeHolderImageForIndex:index]];
-    photoView.loadingImage = YES;
 
-    
-}
-
-- (void)show{
-    
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:self animated:NO completion:^{
-        
-    }];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    
-    CGFloat scrollWidth = size.width + ScrollMargin;
-    [self.scrollView setContentOffset:CGPointMake(scrollWidth * self.currentIndex, 0) animated:YES];
-    
-}
-
-
+#pragma 内部方法，调用LCHModalBrowserDataSource方法
 - (UIImage *)placeHolderImageForIndex:(NSInteger)index{
     
     if([self.dataSource respondsToSelector:@selector(modalBrowser:placeHolderImageForIndex:)]){
@@ -311,6 +343,11 @@
         return rect;
     }
     return CGRectZero;
+}
+
+- (BOOL)prefersStatusBarHidden{
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
